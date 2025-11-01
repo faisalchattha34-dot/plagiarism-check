@@ -96,3 +96,24 @@ if uploaded_files:
 else:
     st.info("Please upload at least two .docx files to compare.")
 
+# ---------------------------------------------------
+# 📤 File uploader + duplicate file check
+# ---------------------------------------------------
+uploaded_files = st.file_uploader(
+    "Upload your .docx files",
+    type=["docx"],
+    accept_multiple_files=True,
+    key="docx_upload"
+)
+
+if uploaded_files:
+    # ✅ Check for duplicates
+    file_names = [f.name for f in uploaded_files]
+    if len(file_names) != len(set(file_names)):
+        st.warning("⚠️ Duplicate files detected. Please upload unique documents.")
+    else:
+        # Continue with your existing logic here 👇
+        student_notes, student_file_names = read_docx_files(uploaded_files)
+        # ... (rest of your app logic: similarity calculation, table, heatmap, etc.)
+
+
