@@ -1,7 +1,8 @@
-streamlit
+streamlit==1.28.2
 pandas
-seaborn==0.13.2
+numpy
 matplotlib
+seaborn==0.13.2
 scikit-learn
 PyPDF2
 python-docx
