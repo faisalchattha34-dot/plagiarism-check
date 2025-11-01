@@ -1,6 +1,6 @@
 streamlit
 pandas
-seaborn
+seaborn==0.13.2
 matplotlib
 scikit-learn
 PyPDF2
