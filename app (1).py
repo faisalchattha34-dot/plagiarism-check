@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import seaborn 
+import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Inject custom CSS for styling
