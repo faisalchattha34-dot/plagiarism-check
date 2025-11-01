@@ -9,8 +9,82 @@ import matplotlib.pyplot as plt
 import joblib
 from sklearn.exceptions import NotFittedError
 
-st.set_page_config(page_title="Document Similarity Checker", layout="wide")
-st.title("📄 Document Similarity Checker")
+# ---------------- Page Setup ----------------
+st.set_page_config(page_title="📄 Document Similarity Checker", layout="wide")
+
+# ---------------- Custom CSS ----------------
+st.markdown("""
+    <style>
+    /* Global background and font */
+    body {
+        background-color: #f4f6f8;
+        color: #0e1117;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Title */
+    .main-title {
+        text-align: center;
+        color: #1f3c88;
+        font-size: 2.3em;
+        font-weight: bold;
+        margin-top: 10px;
+        padding-bottom: 0.5rem;
+        border-bottom: 3px solid #1f3c88;
+    }
+
+    /* Upload box styling */
+    section[data-testid="stFileUploader"] {
+        background-color: #ffffff;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+        border: 2px dashed #1f3c88;
+        margin-bottom: 25px;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4 {
+        color: #1f3c88;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Success and warning boxes */
+    .stAlert {
+        border-radius: 10px;
+    }
+
+    /* Table styling */
+    .stDataFrame {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        margin-top: 15px;
+    }
+
+    /* Heatmap styling */
+    .stPlot {
+        border-radius: 12px;
+        background-color: #ffffff;
+        padding: 15px;
+        box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+
+    /* Footer text */
+    .footer {
+        text-align: center;
+        color: #6c757d;
+        font-size: 0.9em;
+        margin-top: 40px;
+        padding: 15px 0;
+        border-top: 1px solid #ddd;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# ---------------- Title ----------------
+st.markdown("<h1 class='main-title'>📄 Document Similarity Checker</h1>", unsafe_allow_html=True)
 
 # ---------------------------------------------------
 # Function: read all uploaded .docx files
@@ -37,7 +111,6 @@ def calculate_similarity(notes, vectorizer):
     try:
         tfidf_matrix = vectorizer.transform(notes)
     except (NotFittedError, ValueError):
-        # Model not fitted or incompatible -> fit on current notes
         st.warning("⚠️ Model not fitted or incompatible. Training a new TF-IDF model.")
         vectorizer = TfidfVectorizer(stop_words="english")
         tfidf_matrix = vectorizer.fit_transform(notes)
@@ -61,7 +134,7 @@ except Exception:
 # 📤 File uploader + duplicate file check
 # ---------------------------------------------------
 uploaded_files = st.file_uploader(
-    "Upload your .docx files",
+    "Upload your .docx files below 👇",
     type=["docx"],
     accept_multiple_files=True,
     key="docx_upload"
@@ -87,7 +160,7 @@ if uploaded_files:
             # Display table
             st.header("📊 Similarity Results")
             df_similarity = pd.DataFrame(similarity_matrix, index=student_file_names, columns=student_file_names)
-            st.subheader("Similarity Matrix Table")
+            st.subheader("🧾 Similarity Matrix Table")
             st.dataframe(df_similarity)
 
             # Display heatmap
@@ -102,3 +175,9 @@ if uploaded_files:
             st.success("✅ Results saved to similarity_results.csv")
 else:
     st.info("Please upload at least two .docx files to compare.")
+
+# ---------------- Footer ----------------
+st.markdown(
+    "<div class='footer'>Made with ❤️ using Streamlit | Designed by Ayesha</div>",
+    unsafe_allow_html=True
+)
