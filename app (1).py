@@ -17,7 +17,7 @@ st.markdown("""
     <style>
     /* Global background and font */
     body {
-        background-color: #f4f6f8;
+        background-color: orange;
         color: #0e1117;
         font-family: 'Poppins', sans-serif;
     }
@@ -25,7 +25,7 @@ st.markdown("""
     /* Title */
     .main-title {
         text-align: center;
-        color: #1f3c88;
+        color: yellow;
         font-size: 2.3em;
         font-weight: bold;
         margin-top: 10px;
@@ -35,17 +35,17 @@ st.markdown("""
 
     /* Upload box styling */
     section[data-testid="stFileUploader"] {
-        background-color: #ffffff;
+        background-color: black;
         padding: 25px;
         border-radius: 15px;
-        box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+        box-shadow: 0px 3px 10px rgba(0,0,0,0.5);
         border: 2px dashed #1f3c88;
         margin-bottom: 25px;
     }
 
     /* Headings */
     h1, h2, h3, h4 {
-        color: #1f3c88;
+        color: pink;
         font-family: 'Poppins', sans-serif;
     }
 
