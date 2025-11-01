@@ -1,6 +1,11 @@
+
+import subprocess, sys
+
+# Ensure seaborn is installed at runtime (safety net)
+subprocess.check_call([sys.executable, "-m", "pip", "install", "seaborn"])
+import seaborn as sns
 import streamlit as st
 import pandas as pd
-import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Inject custom CSS for styling
