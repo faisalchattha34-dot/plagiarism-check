@@ -72,13 +72,11 @@ uploaded_files = st.file_uploader(
 if uploaded_files:
     student_notes, student_file_names = read_docx_files(uploaded_files)
 
-    if len(file_names) != len(set(file_names)):
-        st.warning("⚠️ Duplicate files detected. Please upload unique documents.")
+    if len(student_notes) <6 :
+        st.warning("Please upload at least two documents with readable text.")
     else:
-        # Continue with your existing logic here 👇
-        student_notes, student_file_names = read_docx_files(uploaded_files)
-        # ... (rest of your app logic: similarity calculation, table, heatmap, etc.)
-
+        similarity_matrix, vectorizer = calculate_similarity(student_notes, vectorizer)
+        
         # Display table
         st.header("📊 Similarity Results")
         df_similarity = pd.DataFrame(similarity_matrix, index=student_file_names, columns=student_file_names)
